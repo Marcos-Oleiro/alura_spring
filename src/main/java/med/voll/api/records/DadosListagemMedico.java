@@ -1,7 +1,7 @@
-package med.voll.api.controller.records;
+package med.voll.api.records;
 
-import med.voll.api.controller.model.Especialidade;
-import med.voll.api.controller.model.Medico;
+import med.voll.api.model.Especialidade;
+import med.voll.api.model.Medico;
 
 public record DadosListagemMedico(
 

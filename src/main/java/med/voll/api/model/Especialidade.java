@@ -1,4 +1,4 @@
-package med.voll.api.controller.model;
+package med.voll.api.model;
 
 public enum Especialidade {
     ORTOPEDIA, CARDIOLOGIA, GINECOLOGIA, DERMATOLOGIA;

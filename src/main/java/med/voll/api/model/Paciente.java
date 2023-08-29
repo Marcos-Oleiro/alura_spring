@@ -1,4 +1,4 @@
-package med.voll.api.controller.model;
+package med.voll.api.model;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -6,11 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.controller.records.DadosCadastroPacientes;
+import med.voll.api.records.DadosAtualizacaoPaciente;
+import med.voll.api.records.DadosCadastroPacientes;
 
 @Table(name = "pacientes")
 @Entity(name = "paciente")
@@ -32,14 +34,33 @@ public class Paciente {
     @Embedded
     private Endereco endereco;
 
+    private Boolean ativo;
+
     public Paciente(DadosCadastroPacientes dados) {
 
-        this.nome=dados.nome();
-        this.email=dados.email();
-        this.telefone=dados.telefone();
-        this.cpf=dados.cpf();
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+        this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
+        this.ativo = true;
     }
 
-    
+    public void atualizarInformacoes(@Valid DadosAtualizacaoPaciente dados) {
+
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
+
+    public void excluir(){
+        this.ativo = false;
+    }
 }
+

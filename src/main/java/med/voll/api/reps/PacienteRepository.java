@@ -1,9 +1,13 @@
 package med.voll.api.reps;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import med.voll.api.controller.model.Paciente;
+import med.voll.api.model.Paciente;
 
 public interface PacienteRepository extends JpaRepository<Paciente,Long>{
+
+    Page<Paciente> findAllByAtivoTrue(Pageable paginacao);
     
 }

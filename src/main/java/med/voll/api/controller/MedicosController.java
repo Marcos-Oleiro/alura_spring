@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import med.voll.api.controller.model.Medico;
-import med.voll.api.controller.records.DadosAtualizacaoMedico;
-import med.voll.api.controller.records.DadosCadastroMedico;
-import med.voll.api.controller.records.DadosListagemMedico;
+import med.voll.api.model.Medico;
+import med.voll.api.records.DadosAtualizacaoMedico;
+import med.voll.api.records.DadosCadastroMedico;
+import med.voll.api.records.DadosListagemMedico;
 import med.voll.api.reps.MedicoRepository;
 
 @RestController
@@ -31,13 +31,13 @@ public class MedicosController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DadosCadastroMedico> insereMedico(@RequestBody @Valid DadosCadastroMedico dados) {
+    public ResponseEntity<DadosCadastroMedico> cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
 
         rep.save(new Medico(dados));
         return ResponseEntity.ok(dados);
     }
 
-    @GetMapping 
+    @GetMapping
     public ResponseEntity<Page<DadosListagemMedico>> listar(
             @PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
 
@@ -46,7 +46,7 @@ public class MedicosController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
+    public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
 
         var medico = rep.getReferenceById(dados.id());
         medico.atualizarInformacoes(dados);
@@ -56,7 +56,7 @@ public class MedicosController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> atualizar (@PathVariable Long id){
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
 
         var medico = rep.getReferenceById(id);
         medico.excluir();
