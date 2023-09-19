@@ -1,4 +1,4 @@
-package med.voll.api.records;
+package med.voll.api.records.medicos;
 
 import med.voll.api.model.Especialidade;
 import med.voll.api.model.Medico;

@@ -1,6 +1,7 @@
-package med.voll.api.records;
+package med.voll.api.records.pacientes;
 
 import jakarta.validation.constraints.NotNull;
+import med.voll.api.records.DadosEndereco;
 
 public record DadosAtualizacaoPaciente (
 
