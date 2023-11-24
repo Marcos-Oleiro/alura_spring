@@ -26,7 +26,7 @@ public class ConsultaService {
     @Autowired
     private MedicoRepository medicoRep;
 
-    public void agendar(DadosAgendamentoConsulta dados) {
+    public Consulta agendar(DadosAgendamentoConsulta dados) {
 
         if (!pracienteRep.existsById(dados.idPaciente()))
             throw new ValidacaoException("Paciente não encontrado");
@@ -36,12 +36,13 @@ public class ConsultaService {
 
         Paciente paciente = pracienteRep.findById(dados.idPaciente()).get();
 
-        // Medico medico = medicoRep.findById(dados.idMedico()).get();
         Medico medico = escolherMédico(dados);
 
         Consulta consulta = new Consulta(null, medico, paciente, dados.data());
 
         consultaRep.save(consulta);
+
+        return consulta;
     }
 
     private Medico escolherMédico(DadosAgendamentoConsulta dados) {

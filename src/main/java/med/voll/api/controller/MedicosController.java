@@ -37,10 +37,14 @@ public class MedicosController {
     @Transactional
     public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
 
-        Medico medicoNovo = rep.save(new Medico(dados));
-        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medicoNovo.getId()).toUri();
+        // Medico medicoNovo = rep.save(new Medico(dados));
+        // URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medicoNovo.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medicoNovo));
+        // return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medicoNovo));
+
+        return ResponseEntity.ok(dados);
+
+        
     }
 
     @GetMapping("/{id}")

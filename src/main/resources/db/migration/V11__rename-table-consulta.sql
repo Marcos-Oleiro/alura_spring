@@ -1,0 +1,1 @@
+rename table consultas to consulta;
